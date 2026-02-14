@@ -1,22 +1,17 @@
 import os
-from dotenv import load_dotenv
-from aiogram import Bot, Dispatcher
+import asyncio
+from aiogram import Bot, Dispatcher, types, F
+from aiogram.filters import Command
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-load_dotenv() # Загружает данные из файла .env
-
+# Берем данные из настроек сервера (Environment Variables)
 TOKEN = os.getenv("BOT_TOKEN")
-ADMIN_ID = int(os.getenv("ADMIN_ID"))
+# ID твоих каналов (подставь свои цифры)
+CHANNEL_1_ID = -1002047321568 
+CHANNEL_2_ID = -1002145678910
+# Твой ID для админки
+ADMIN_ID = 1256583707
 
-# Замени эти ID на реальные (узнай их через @getmyid_bot)
-CHANNEL_1_ID = -1003131044612  # Пример ID для канала Mzr1...
-CHANNEL_2_ID = -1003870739980  # Пример ID для канала fag254
-
-# Ссылки
-URL_1 = "https://t.me/+Mzr1DD7UgD80NjAy"
-URL_2 = "https://t.me/+zT8UgqzcqfsyZjIy"
-PRIVATE_URL = "https://t.me/+IKG2xbs9o8o0ZDgy"
-
-logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
@@ -64,7 +59,6 @@ async def check_callback(callback: types.CallbackQuery):
         await callback.answer("❌ Ты подписался не на все каналы!", show_alert=True)
 
 async def main():
-    print("Бот запущен...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
